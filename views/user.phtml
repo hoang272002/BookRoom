@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách Booking</title>
+    <link rel="stylesheet" href="./assets/css/style_admin.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Danh sách Booking</h2>
+
+        <!-- Bộ lọc -->
+        <div class="status-filter">
+            <form action="booking_list.php" method="GET">
+                <label for="username">Tên đăng nhập:</label>
+                <input type="text" id="username" name="username">
+
+                <label for="status">Trạng thái:</label>
+                <select name="status" id="status">
+                    <option value="">Tất cả</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="finished">Finished</option>
+                </select>
+                <button type="submit" class="btn">Lọc</button>
+            </form>
+        </div>
+
+        <!-- Bảng danh sách booking -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Tên người dùng</th>
+                    <th>Ngày tạo</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    // PHP để load danh sách booking
+                    // Đặt kết nối cơ sở dữ liệu và thực hiện truy vấn tại đây
+                    
+                    foreach ($bookings as $booking) {
+                        echo "<tr>";
+                        echo "<td>{$booking['booking_id']}</td>";
+                        echo "<td>{$booking['username']}</td>";
+                        echo "<td>{$booking['created_date']}</td>";
+                        echo "<td>{$booking['status']}</td>";
+                        echo "<td>";
+                            
+                        if ($booking['status'] === 'pending') {
+                            echo "<form action='update_booking.php' method='POST'>";
+                            echo "<input type='hidden' name='booking_id' value='{$booking['booking_id']}'>";
+                        
+                            echo "<button type='submit' class='btn btn-update'>Cancel</button>";
+                            echo "</form>";
+                        } 
+                        
+                        echo "<a href='index.php?action=chitiet&bookid={$booking['booking_id']}' class='btn'>Xem chi tiết</a>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

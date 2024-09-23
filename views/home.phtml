@@ -1,0 +1,103 @@
+<section class="filter-section">
+    <h2>Classroom List</h2>
+    <div class="filters">
+        <label for="block-filter">Filter by Block:</label>
+        <select id="block-filter">
+            <option value="">All Blocks</option>
+            <option value="A">Block A</option>
+            <option value="B">Block B</option>
+            <option value="C">Block C</option>
+            <option value="D">Block D</option>
+            <option value="E">Block E</option>
+            <option value="F">Block F</option>
+            <option value="G">Block G</option>
+            <option value="H">Block H</option>
+        </select>
+
+        <label for="capacity-filter">Filter by Capacity:</label>
+        <select id="capacity-filter">
+            <option value="">All Capacities</option>
+            <option value="0-50">0-50</option>
+            <option value="50-100">50-100</option>
+            <option value="100+">100+</option>
+        </select>
+
+        <div class="summary">
+            <p>Total Rooms: <span id="total-rooms"><?php echo $totalRoom ?></span></p>
+            <p>Available Rooms: <span id="available-rooms"><?php echo $totalRoomavai ?></span></p>
+        </div>
+    </div>
+</section>
+
+<section class="room-list">
+    <table id="room-list">
+        <thead>
+            <tr>
+                <th>Room Name</th>
+                <th>Block</th>
+                <th>Capacity</th>
+                <th>Status</th>
+                <?php if(isset($_SESSION['user']) && $_SESSION['user']->user_type == "admin"): ?>
+                    <th>Action</th>
+                <?php endif; ?>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($dsRoom as $row): ?>
+            <tr>
+                <td><?php echo $row['room_name']; ?></td>
+                <td><?php echo $row['block']; ?></td>
+                <td><?php echo $row['capacity']; ?></td>
+                <td class="status <?php echo strtolower($row['status']); ?>"><?php echo $row['status']; ?></td>
+                <?php if(isset($_SESSION['user']) && $_SESSION['user']->user_type == "admin"): ?>
+                    <td><a href="index.php?action=updateRoom&roomID=<?php echo $row['room_id']; ?>" class="update-room">Update</a></td>
+                <?php endif; ?>
+            </tr>
+        <?php endforeach; ?>
+
+        </tbody>
+    </table>
+    <div class="pagination">
+        <a href="#" class="prev">Previous</a>
+        <span>Page 1 of 5</span>
+        <a href="#" class="next">Next</a>
+    </div>
+</section>
+
+<script>
+document.getElementById('block-filter').addEventListener('change', filterRooms);
+document.getElementById('capacity-filter').addEventListener('change', filterRooms);
+
+function filterRooms() {
+    var blockValue = document.getElementById('block-filter').value;
+    var capacityValue = document.getElementById('capacity-filter').value;
+
+    var rows = document.querySelectorAll('#room-list tbody tr'); 
+
+    rows.forEach(function(row) {
+        var block = row.cells[1].textContent.trim(); // Lấy giá trị block
+        var capacity = parseInt(row.cells[2].textContent.trim()); // Lấy giá trị capacity
+        
+        // Lọc theo block
+        var blockMatch = (blockValue === "" || block === blockValue);
+
+        // Lọc theo capacity
+        var capacityMatch = false;
+        if (capacityValue === "100+") {
+            capacityMatch = (capacity > 100);
+        } else if (capacityValue !== "") {
+            var capacityRange = capacityValue.split('-');
+            capacityMatch = capacity >= parseInt(capacityRange[0]) && capacity <= parseInt(capacityRange[1]);
+        } else {
+            capacityMatch = true; // Hiển thị tất cả nếu không có bộ lọc capacity
+        }
+
+        // Hiển thị hoặc ẩn hàng dựa trên kết quả lọc
+        if (blockMatch && capacityMatch) {
+            row.style.display = ""; // Hiển thị hàng
+        } else {
+            row.style.display = "none"; // Ẩn hàng
+        }
+    });
+}
+</script>

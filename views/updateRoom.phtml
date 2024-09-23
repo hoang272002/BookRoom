@@ -1,0 +1,38 @@
+<div class="update-room-form">
+    <h2>Update Room Information</h2>
+    <form action="index.php?action=updateRoom&roomID=<?php echo $room[0]['room_id']; ?>" method="POST">
+        <input type="hidden" name="formAction" value="updateRoom">
+        <div class="form-group">
+            <label for="roomName">Room Name:</label>
+            <input type="text" id="roomName" name="room_name" value="<?php echo $room[0]['room_name']; ?>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Block:</label>
+            <input type="text" id="location" name="block" value="<?php echo $room[0]['block']; ?>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" name="capacity" value="<?php echo $room[0]['capacity']; ?>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Condition">Condition:</label>
+            <select id="Condition" name="room_condition">
+                <option value="good" <?php echo ($room[0]['room_condition'] == 'good') ? 'selected' : ''; ?>>Good</option>
+                <option value="bad" <?php echo ($room[0]['room_condition'] == 'bad') ? 'selected' : ''; ?>>Bad</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Type">Type:</label>
+            <select id="Type" name="type">
+                <option value="public" <?php echo ($room[0]['type'] == 'public') ? 'selected' : ''; ?>>Public</option>
+                <option value="private" <?php echo ($room[0]['type'] == 'private') ? 'selected' : ''; ?>>Private</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn" name="btnUpdRoom">Update Room</button>
+    </form>
+</div>

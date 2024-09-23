@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+    background-color: #45a049;
+    border-radius: 5px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.actions .btn {
+    background-color: #fff;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.actions .btn:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+.actions .cart-btn {
+    position: relative;
+}
+
+.actions .cart-btn img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    transition: transform 0.3s ease;
+}
+
+.actions .cart-btn:hover img {
+    transform: scale(1.1);
+}
+
+main {
+    padding: 40px 20px;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.filters {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.filters select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.summary {
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+}
+
+.room-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.room-list th, .room-list td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.room-list th {
+    background-color: #f8f8f8;
+    font-size: 16px;
+}
+
+.room-list td {
+    font-size: 14px;
+}
+
+.status.available {
+    color: green;
+}
+
+.status.unavailable {
+    color: red;
+}
+
+.update-room {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.update-room:hover {
+    text-decoration: underline;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination a {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+}

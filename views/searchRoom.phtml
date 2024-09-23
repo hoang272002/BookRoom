@@ -1,0 +1,46 @@
+<div class="search-container">
+        <h1>Search for Available Rooms</h1>
+        <form action="index.php?action=searchRoom" method="POST">
+        <input type="hidden" name="formAction" value="searchRoom">
+            <div class="form-group">
+                <label for="capacity">Minimum Capacity:</label>
+                <input type="number" id="capacity" name="capacity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="borrowDate">Borrow Date:</label>
+                <input type="datetime-local" id="borrow_time" name="borrow_time" required>
+            </div>
+
+            <div class="form-group">
+                <label for="returnDate">Return Date:</label>
+                <input type="datetime-local" id="return_time" name="return_time" required>
+            </div>
+
+            <button type="submit" class="btn" name ="btnSearch">Search</button>
+        </form>
+
+        <div class="room-results">
+            <table>
+                <thead><tr><th>Room Name</th><th>Block</th><th>Capacity</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                    <?php
+              
+                    if (!empty($rooms)) {
+                    
+                        foreach ($rooms as $room) {
+                            echo '<tr>';
+                            echo '<td>' . $room['room_name'] . '</td>';
+                            echo '<td>' . $room['block'] . '</td>';
+                            echo '<td>' . $room['capacity'] . '</td>';
+                            echo '<td class="status">' . $room['status'] . '</td>';
+                            echo '<td><a href="index.php?roomId=' . $room['room_id']. '&borrowDate=' . $borrow_time . '&returnDate=' . $return_time . '" class="btn">Add to Register</a></td>';
+                            echo '</tr>';   
+                        }
+
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>

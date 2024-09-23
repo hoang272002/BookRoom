@@ -1,0 +1,77 @@
+
+<?php 
+
+session_start();
+
+if (isset($_SESSION['mess_success'])){
+    echo '<script>alert("' .$_SESSION['mess_success'] . '");</script>';
+    unset($_SESSION['mess_success']);
+}
+
+if (isset($_SESSION['mess_error'])){
+    echo '<script>alert("' .$_SESSION['mess_error'] . '");</script>';
+    unset($_SESSION['mess_error']);
+}
+
+if (isset($_GET['index']) && isset($_SESSION['cart'])) {
+    $index = intval($_GET['index']);
+    
+    if (isset($_SESSION['cart'][$index])) {
+        unset($_SESSION['cart'][$index]);
+        $_SESSION['cart'] = array_values($_SESSION['cart']); // Reindex array
+    }
+
+    header('Location: index.php?action=cart'); 
+}
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom Management</title>
+    <link rel="stylesheet" href="./assets/css/style_template.css">
+    <link rel="stylesheet" href="./assets/css/style_update.css">
+    <link rel="stylesheet" href="./assets/css/style_search.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">School Logo</div>
+            <ul class="menu">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php?action=searchRoom">Search Available Rooms</a></li>
+            </ul>
+            <div class="actions">
+                <?php 
+                if(isset($_SESSION['user'])){
+                    
+                    
+                    echo "<a href=\"index.php?action=QuanLy&type=".$_SESSION['user']->user_type ."&userid=".$_SESSION['user']->user_id ."\" class=\"btn\">Management infor,  ".$_SESSION['user']->username ."  </a>";
+                    echo "<a href=\"index.php?action=logout\" class=\"btn\">logout</a>";
+                }
+                else{
+                    echo "<a href=\"index.php?action=login\" class=\"btn\">Login</a>";
+                }
+                
+                ?>
+                <a href="index.php?action=cart" class="btn">
+                    Cart
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+      <?php require($VIEW) ?>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 School Name. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

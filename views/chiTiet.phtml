@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Booking</title>
+    <link rel="stylesheet" href="./assets/css/style_chitiet.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Chi tiết Booking</h2>
+
+        <!-- Thông tin booking -->
+        <div class="booking-info">
+            <h3>Thông tin Booking</h3>
+            <p><strong>ID Booking:</strong><?php echo $bookid ?></p>
+            <p><strong>Tên người dùng:</strong><?php echo $username ?></p>
+            <p><strong>Ngày tạo:</strong> <?php echo $created_date?></p>
+            <p><strong>Trạng thái:</strong> <?php echo $status ?></p>
+        </div>
+
+        <!-- Danh sách phòng -->
+        <div class="room-list">
+            <h3>Danh sách phòng đã đặt</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên phòng</th>
+                        <th>Thời gian mượn</th>
+                        <th>Thời gian trả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    foreach ($list as $row){
+                        echo "  <tr>
+                                <td>".$row['room_id']."</td>
+                                
+                                <td>".$row['start_time']."</td>
+                                <td>".$row['end_time']."</td>
+                            </tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Nút quay lại -->
+        <div class="back-button">
+            <a href="booking_list.html" class="btn-back">Quay lại danh sách</a>
+        </div>
+    </div>
+</body>
+</html>
